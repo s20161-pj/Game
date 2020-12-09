@@ -1,11 +1,9 @@
-package pl.pjatk.gameplay.service;
+package pl.pjatk.gameplay.player.service;
 
-import pl.pjatk.gameplay.model.Player;
+import pl.pjatk.gameplay.player.model.Player;
 import org.springframework.stereotype.Service;
-import pl.pjatk.gameplay.repository.PlayerRepository;
+import pl.pjatk.gameplay.player.repository.PlayerRepository;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

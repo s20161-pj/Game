@@ -1,6 +1,5 @@
-package pl.pjatk.gameplay.model;
+package pl.pjatk.gameplay.player.model;
 
-import javax.annotation.processing.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

@@ -1,10 +1,10 @@
-package pl.pjatk.gameplay.controller;
+package pl.pjatk.gameplay.player.controller;
 
 import org.springframework.web.bind.annotation.*;
-import pl.pjatk.gameplay.model.Player;
+import pl.pjatk.gameplay.player.model.Player;
 import org.springframework.http.ResponseEntity;
-import pl.pjatk.gameplay.service.DamageService;
-import pl.pjatk.gameplay.service.PlayerService;
+import pl.pjatk.gameplay.player.service.DamageService;
+import pl.pjatk.gameplay.player.service.PlayerService;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,8 +56,8 @@ public class PlayerController {
         }
     }
     @PutMapping("/attack/{attackerId}/{defenderId}")
-    public ResponseEntity<Integer> attack(@PathVariable Long attackerId, @PathVariable Long defenderId) {
-        return ResponseEntity.ok(damageService.attack(attackerId, defenderId));
+    public ResponseEntity<Integer> attack(@RequestBody Player attacker, @RequestBody Player defender) {
+        return ResponseEntity.ok(damageService.attack(attacker, defender));
     }
 }
  
