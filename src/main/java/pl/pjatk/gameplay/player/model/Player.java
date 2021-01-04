@@ -3,6 +3,7 @@ package pl.pjatk.gameplay.player.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Player {
@@ -13,24 +14,34 @@ public class Player {
     private int health;
     private int attack;
     private int mana;
+    private PlayerClass playerClass;
+    private PlayerRace playerRace;
+
+    @OneToOne(mappedBy = "player")
+    private Weapon weapon;
 
     public Player() {
-
     }
 
-    public Player(Long id, String nickname, int health, int attack, int mana) {
+    public Player(Long id, String nickname, int health, int attack, int mana, PlayerClass playerClass, PlayerRace playerRace, Weapon weapon) {
         this.id = id;
         this.nickname = nickname;
         this.health = health;
         this.attack = attack;
         this.mana = mana;
+        this.playerClass=playerClass;
+        this.playerRace=playerRace;
+        this.weapon = weapon;
+
     }
 
-    public Player(String nickname, int health, int attack, int mana) {
+    public Player(String nickname, int health, int attack, int mana, PlayerClass playerClass, PlayerRace playerRace) {
         this.nickname = nickname;
         this.health = health;
         this.attack = attack;
         this.mana = mana;
+        this.playerClass=playerClass;
+        this.playerRace=playerRace;
     }
 
     public void setId(Long id) {

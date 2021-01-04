@@ -10,18 +10,18 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/player")
+@RequestMapping("/player")                  //nadawanie endpointowi nazwy (adresu)
 public class PlayerController {
     private PlayerService playerService;
-    private DamageService damageService;
+    private DamageService damageService;        //prywatne pola typu playerservice i damageservice służące do wykonywania określonych akcji (metod biznesowych - wykonuje się w nich logika)
 
     public PlayerController(PlayerService playerService,
                             DamageService damageService) {
-        this.playerService = playerService;
+        this.playerService = playerService;         //przypisanie referencji polom do tego obiektu; wstrzykiwanie zależności
         this.damageService = damageService;
     }
 
-    @GetMapping
+    @GetMapping //adnotacja frameworkowa, która mapuje (tworzy endpoint GET) do adresu /player
     public ResponseEntity<List<Player>> findAll() {
         return ResponseEntity.ok(playerService.findAll());
     }
@@ -55,9 +55,9 @@ public class PlayerController {
             return ResponseEntity.notFound().build();
         }
     }
-    @PutMapping("/attack/{attackerId}/{defenderId}")
-    public ResponseEntity<Integer> attack(@RequestBody Player attacker, @RequestBody Player defender) {
-        return ResponseEntity.ok(damageService.attack(attacker, defender));
+    @PutMapping("/attack")
+    public ResponseEntity<Integer> attack(@RequestBody List<Player> players) {
+        return ResponseEntity.ok(damageService.attack(players.get(0), players.get(1)));
     }
 }
  
