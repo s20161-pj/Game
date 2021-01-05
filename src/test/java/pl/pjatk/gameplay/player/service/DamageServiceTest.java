@@ -1,9 +1,9 @@
 package pl.pjatk.gameplay.player.service;
 
 import org.junit.jupiter.api.Test;
-import pl.pjatk.gameplay.player.model.Player;
-import pl.pjatk.gameplay.player.model.PlayerClass;
-import pl.pjatk.gameplay.player.model.PlayerRace;
+import pl.pjatk.gameplay.player.model.*;
+
+import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,8 +13,11 @@ class DamageServiceTest {
     @Test
     void attackTest() {
         //given
-        Player attacker = new Player("Test player1", 100, 100, 10, PlayerClass.Warrior, PlayerRace.Gnome);
-        Player defender = new Player("Test player2", 200, 20, 5, PlayerClass.Warrior, PlayerRace.Gnome);
+        ArrayList<Armor> armors = new ArrayList<Armor>();
+        Armor armor = new Armor("armor1", 100, ArmorType.Cloth);
+        armors.add(armor);
+        Player attacker = new Player("Test player1", 100, 100, 10, PlayerClass.Warrior, PlayerRace.Gnome,new Weapon("Sword1", WeaponType.Sword,100,200,150), armors);
+        Player defender = new Player("Test player2", 200, 20, 5, PlayerClass.Warrior, PlayerRace.Gnome,new Weapon("Sword1",WeaponType.Sword,100,200,150), armors);
         //when
         int defenderHealth = damageService.attack(attacker, defender);
         //then
@@ -24,7 +27,10 @@ class DamageServiceTest {
     @Test
     void healTest() {
         //given
-        Player playerToHeal = new Player("Test player1", 100, 100, 10, PlayerClass.Warrior, PlayerRace.Gnome);
+        ArrayList<Armor> armors = new ArrayList<Armor>();
+        Armor armor = new Armor("armor1", 100, ArmorType.Cloth);
+        armors.add(armor);
+        Player playerToHeal = new Player("Test player1", 100, 100, 10, PlayerClass.Warrior, PlayerRace.Gnome,new Weapon("Sword1",WeaponType.Sword,100,200,150), armors);
         int healthToAdd = 50;
         //when
         Player playerHealed = damageService.Heal(playerToHeal, healthToAdd);
@@ -36,7 +42,10 @@ class DamageServiceTest {
     @Test
     void removeManaTest(){
         //given
-        Player player = new Player("Test player1",100,100,50, PlayerClass.Warrior, PlayerRace.Gnome);
+        ArrayList<Armor> armors = new ArrayList<Armor>();
+        Armor armor = new Armor("armor1", 100, ArmorType.Cloth);
+        armors.add(armor);
+        Player player = new Player("Test player1",100,100,50, PlayerClass.Warrior, PlayerRace.Gnome,new Weapon("Sword1",WeaponType.Sword,100,200,150), armors);
         int manaToRemove = 15;
         int expectedMana = player.getMana()-manaToRemove;
         //when
@@ -47,8 +56,11 @@ class DamageServiceTest {
     @Test
     void AttackByPlayersTest(){
         //given
-        Player attacker = new Player("Test player1", 100, 100, 50, PlayerClass.Warrior, PlayerRace.Gnome);
-        Player defender = new Player("Test player2",200,200,100, PlayerClass.Warrior, PlayerRace.Gnome);
+        ArrayList<Armor> armors = new ArrayList<Armor>();
+        Armor armor = new Armor("armor1", 100, ArmorType.Cloth);
+        armors.add(armor);
+        Player attacker = new Player("Test player1", 100, 100, 50, PlayerClass.Warrior, PlayerRace.Gnome,new Weapon("Sword1",WeaponType.Sword,100,200,150), armors);
+        Player defender = new Player("Test player2",200,200,100, PlayerClass.Warrior, PlayerRace.Gnome,new Weapon("Sword1",WeaponType.Sword,100,200,150), armors);
         int expectedHealth = defender.getHealth() - attacker.getAttack();
 
         //when

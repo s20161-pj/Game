@@ -1,9 +1,8 @@
 package pl.pjatk.gameplay.player.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Player {
@@ -16,14 +15,15 @@ public class Player {
     private int mana;
     private PlayerClass playerClass;
     private PlayerRace playerRace;
-
+    private int level;
     @OneToOne(mappedBy = "player")
     private Weapon weapon;
-
+    @OneToMany(mappedBy = "player")
+    private List<Armor> armors;
     public Player() {
     }
 
-    public Player(Long id, String nickname, int health, int attack, int mana, PlayerClass playerClass, PlayerRace playerRace, Weapon weapon) {
+    public Player(Long id, String nickname, int health, int attack, int mana, PlayerClass playerClass, PlayerRace playerRace, Weapon weapon,ArrayList<Armor>armors) {
         this.id = id;
         this.nickname = nickname;
         this.health = health;
@@ -32,16 +32,20 @@ public class Player {
         this.playerClass=playerClass;
         this.playerRace=playerRace;
         this.weapon = weapon;
-
+        this.armors=armors;
+        this.level=1;
     }
 
-    public Player(String nickname, int health, int attack, int mana, PlayerClass playerClass, PlayerRace playerRace) {
+    public Player(String nickname, int health, int attack, int mana, PlayerClass playerClass, PlayerRace playerRace,Weapon weapon,ArrayList<Armor>armors) {
         this.nickname = nickname;
         this.health = health;
         this.attack = attack;
         this.mana = mana;
         this.playerClass=playerClass;
         this.playerRace=playerRace;
+        this.weapon = weapon;
+        this.armors=armors;
+        this.level=1;
     }
 
     public void setId(Long id) {
