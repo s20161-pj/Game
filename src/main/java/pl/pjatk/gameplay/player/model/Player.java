@@ -20,7 +20,7 @@ public class Player {
     private Weapon weapon;
     @OneToMany(mappedBy = "player")
     private List<Armor> armors;
-    public Player() {
+    public Player(int i, String nickname, int i1, int i2) {
     }
 
     public Player(Long id, String nickname, int health, int attack, int mana, PlayerClass playerClass, PlayerRace playerRace, Weapon weapon,ArrayList<Armor>armors) {
@@ -46,6 +46,10 @@ public class Player {
         this.weapon = weapon;
         this.armors=armors;
         this.level=1;
+    }
+
+    public Player() {
+
     }
 
     public void setId(Long id) {

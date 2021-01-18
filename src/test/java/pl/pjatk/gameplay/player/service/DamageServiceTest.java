@@ -19,7 +19,7 @@ class DamageServiceTest {
         Player attacker = new Player("Test player1", 100, 100, 10, PlayerClass.Warrior, PlayerRace.Gnome,new Weapon("Sword1", WeaponType.Sword,100,200,150), armors);
         Player defender = new Player("Test player2", 200, 20, 5, PlayerClass.Warrior, PlayerRace.Gnome,new Weapon("Sword1",WeaponType.Sword,100,200,150), armors);
         //when
-        int defenderHealth = damageService.attack(attacker, defender);
+        Player defenderHealth = damageService.attack(attacker, defender);
         //then
         assertThat(defenderHealth).isEqualTo(100);
     }
@@ -64,8 +64,15 @@ class DamageServiceTest {
         int expectedHealth = defender.getHealth() - attacker.getAttack();
 
         //when
-        int defenderHealth  = damageService.attack(attacker, defender);
+        Player defenderHealth  = damageService.attack(attacker, defender);
         //then
         assertThat(defenderHealth).isEqualTo(expectedHealth);
     }
+    public Player attack(Player attacker, Player defender) {
+        defender.setHealth(
+                defender.getHealth() - attacker.getAttack()
+        );
+        return defender;
+    }
+
 }

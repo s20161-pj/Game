@@ -57,7 +57,7 @@ public class PlayerController {
     }
     @PutMapping("/attack")
     public ResponseEntity<Integer> attack(@RequestBody List<Player> players) {
-        return ResponseEntity.ok(damageService.attack(players.get(0), players.get(1)));
+        return ResponseEntity.ok(damageService.attack(players.get(0), players.get(1)).getHealth());
     }
 }
  

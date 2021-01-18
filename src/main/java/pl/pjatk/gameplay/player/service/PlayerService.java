@@ -9,6 +9,8 @@ import java.util.Optional;
 
 @Service
 public class PlayerService {
+
+   private  DamageService damageService;
     public PlayerRepository playerRepository;
 
     public PlayerService(PlayerRepository playerRepository) {
@@ -45,6 +47,17 @@ public class PlayerService {
 
         return playerRepository.save(player);
     }
+    public Player attack(Long attackerId, Long defenderId){
+        Player attacker = findById(attackerId).get();
+        Player defender = findById(defenderId).get();
+        defender=damageService.attack(attacker,defender);
+        playerRepository.save(defender);
+        return defender;
+
+    }
+
+
+
 }
 
 
